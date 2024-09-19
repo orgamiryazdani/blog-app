@@ -8,13 +8,8 @@ import setCookiesOnReq from "@/utils/setCookieOnReq";
 import { cookies } from "next/headers";
 
 async function PostList() {
-  // await new Promise((res) => setTimeout(res, 3000));
-  // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list`);
-  // const {
-  //   data: { posts },
-  // } = await res.json();
   const cookieStore = cookies()
-const options = setCookiesOnReq(cookieStore)
+  const options = setCookiesOnReq(cookieStore)
   const posts = await getPosts(options);
 
   return posts.length > 0 ? (
