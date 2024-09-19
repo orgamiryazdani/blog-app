@@ -3,15 +3,8 @@ import Link from "next/link";
 import { ClockIcon } from "@heroicons/react/24/outline";
 import Author from "./Author";
 import PostInteraction from "./PostInteraction";
-import { getPosts } from "@/services/postServices";
-import setCookiesOnReq from "@/utils/setCookieOnReq";
-import { cookies } from "next/headers";
 
-async function PostList() {
-  const cookieStore = cookies()
-  const options = setCookiesOnReq(cookieStore)
-  const posts = await getPosts(options);
-
+async function PostList({ posts }) {
   return posts.length > 0 ? (
     <div className="grid grid-cols-12 gap-8">
       {posts.map((post) => (
@@ -27,7 +20,6 @@ async function PostList() {
                 {post.title}
               </h2>
             </Link>
-
             {/* post author - readingTime */}
             <div className="flex items-center justify-between mb-4">
               <Author {...post.author} />
