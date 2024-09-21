@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",
     "axios": "^1.7.6",
+    "classnames": "^2.5.1",
     "eslint-config-next": "^15.0.0-rc.0",
     "next": "^15.0.0-rc.0",
     "query-string": "^9.1.0",
