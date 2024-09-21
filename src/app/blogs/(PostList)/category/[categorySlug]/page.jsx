@@ -1,20 +1,35 @@
+import { getPosts } from '@/services/postServices';
+import setCookiesOnReq from '@/utils/setCookieOnReq';
 import PostList from 'app/blogs/_components/PostList';
+import { cookies } from 'next/headers';
+import queryString from 'query-string';
 import React from 'react'
 
-async function Category({ params }) {
+async function Category({ params, searchParams }) {
     const { categorySlug } = params
+    const queries = queryString.stringify(searchParams) + "&" + `categorySlug=${categorySlug}`
+    const cookieStore = cookies()
+    const options = setCookiesOnReq(cookieStore)
+    const posts = await getPosts(queries, options);
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list?categorySlug=${categorySlug}`);
-    const { data } = await res.json();
-    const { posts } = data || {};
+    const { q } = searchParams
 
     return (
-        <div>
+        <>
             {
-                posts.length === 0 ? <p className='text-lg text-secondary-600'>پستی در این دسته بندی پیدا نشد</p> :
-                    <PostList posts={posts}/>
+                q ?
+                    <p className='mb-4 text-secondary-700'>
+                        {
+                            posts.length == 0 ?
+                                "هیچ پستی با این مشخصات پیدا نشد" :
+                                `نشان دادن ${posts.length} نتیجه برای`
+                        }
+                        <span className='font-bold'>&quot;{q}&quot;</span>
+                    </p>
+                    : null
             }
-        </div>
+            <PostList posts={posts} />
+        </>
     )
 }
 

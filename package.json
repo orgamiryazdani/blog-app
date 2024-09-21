@@ -14,6 +14,7 @@
     "axios": "^1.7.6",
     "eslint-config-next": "^15.0.0-rc.0",
     "next": "^15.0.0-rc.0",
+    "query-string": "^9.1.0",
     "react": "^19.0.0-rc-1eaccd82-20240816",
     "react-dom": "^19.0.0-rc-1eaccd82-20240816",
     "react-hook-form": "^7.53.0",
